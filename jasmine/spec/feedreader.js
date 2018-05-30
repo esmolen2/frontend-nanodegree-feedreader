@@ -66,7 +66,7 @@ $(function() {
 			expect(bodyClasses.contains(hiddenClass)).toBe(true);
 		});
 
-         /* TODO: Write a test that ensures the menu changes
+         /* Required: Test that ensures the menu changes
           * visibility when the menu icon is clicked. This test
           * should have two expectations: does the menu display when
           * clicked and does it hide when clicked again.
@@ -81,19 +81,54 @@ $(function() {
 			expect(bodyClasses.contains(hiddenClass)).toBe(true);
   		});
 	});
-    /* TODO: Write a new test suite named "Initial Entries" */
+    /* Required: Write a new test suite named "Initial Entries" */
 
-        /* TODO: Write a test that ensures when the loadFeed
+	describe('Initial Entries', function() {
+
+		beforeEach(function(done) {
+			loadFeed(0, done);
+		});
+
+        /* Required: Test that ensures when the loadFeed
          * function is called and completes its work, there is at least
          * a single .entry element within the .feed container.
          * Remember, loadFeed() is asynchronous so this test will require
          * the use of Jasmine's beforeEach and asynchronous done() function.
          */
+		it('feed contains at least a single entry', function(done) {
+			const feed = document.querySelector('.feed');
+			const entryCount = feed.getElementsByClassName('entry').length;
 
-    /* TODO: Write a new test suite named "New Feed Selection" */
+			expect(entryCount > 0).toBe(true);
+			done();
+   		});
 
-        /* TODO: Write a test that ensures when a new feed is loaded
+	});
+
+    /* Required: Write a new test suite named "New Feed Selection" */
+
+	describe('New Feed Selection', function() {
+		let oldFeed;
+		let newFeed;
+
+		beforeEach(function(done) {
+			loadFeed(2, function() {
+				oldFeed = document.querySelector('.feed').innerHTML;
+				loadFeed(1, function() {
+					newFeed = document.querySelector('.feed').innerHTML;
+					done();
+				})
+			});
+		});
+
+        /* Required: Test that ensures when a new feed is loaded
          * by the loadFeed function that the content actually changes.
          * Remember, loadFeed() is asynchronous.
          */
+
+		it('changes content inside feed', function(done) {
+ 			expect(oldFeed !== newFeed).toBe(true);
+			done();
+    	});
+	});
 }());
