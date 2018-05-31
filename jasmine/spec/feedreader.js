@@ -33,8 +33,8 @@ $(function() {
          */
         it('each have a URL', function() {
 			allFeeds.forEach(function(feed) {
-				expect(feed.url).toBeDefined();
-				expect(feed.url.length).not.toBe(0);
+				expect(feed.url).toBeDefined();			// Feed URL is defined
+				expect(feed.url.length).not.toBe(0);	// Feed URL is not empty
 			});
         });
 
@@ -45,8 +45,8 @@ $(function() {
          */
 		it('each have a name', function() {
  			allFeeds.forEach(function(feed) {
- 				expect(feed.name).toBeDefined();
-				expect(feed.name.length).not.toBe(0);
+ 				expect(feed.name).toBeDefined();		// Feed name is defined
+				expect(feed.name.length).not.toBe(0);	// Feed name is not empty
  			});
         });
     });
@@ -55,7 +55,7 @@ $(function() {
     /* Required: Write a new test suite named "The menu" */
 	describe('The menu', function() {
 		const bodyClasses = document.querySelector('body').classList;
-		const hiddenClass = 'menu-hidden';
+		const hiddenClass = 'menu-hidden';	// CSS class that hides the menu
 
         /* Required: Test that ensures the menu element is
          * hidden by default. You'll have to analyze the HTML and
@@ -74,9 +74,11 @@ $(function() {
 		it('changes visibility when clicked', function() {
   			const menuHamburger = document.querySelector('.menu-icon-link');
 
+			// Menu displayed when clicked
 			menuHamburger.click();
 			expect(bodyClasses.contains(hiddenClass)).toBe(false);
 
+			// Menu hidden when clicked again
 			menuHamburger.click();
 			expect(bodyClasses.contains(hiddenClass)).toBe(true);
   		});
